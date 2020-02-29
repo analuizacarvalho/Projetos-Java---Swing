@@ -20,7 +20,7 @@ public class Controller {
     
     
     public void filtrar() {
-		Thread comparadorImagem = new ComparadorImagem(view.getBarra(), diretorio.getAbsolutePath());
+		Thread comparadorImagem = new ComparadorImagem(view.getBarraPorcentagem(), diretorio.getAbsolutePath());
 		comparadorImagem.start();
     }
     

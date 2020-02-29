@@ -1,5 +1,4 @@
 import java.awt.Component;
-
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.io.File;
@@ -15,17 +14,16 @@ import javax.swing.JProgressBar;
 public class ComparadorImagem extends Thread {
 
 	private static final Component OBSERVER = new Component() {};
-	JProgressBar progressBar;
+	JProgressBar barraPorcentagem;
 	String caminhoPastaOriginal;
 	
-	public ComparadorImagem(JProgressBar bar, String caminho) {
-		progressBar = bar;
+	public ComparadorImagem(JProgressBar barra, String caminho) {
+		barraPorcentagem = barra;
 		caminhoPastaOriginal = caminho;
 	}
 	
 	public void run() {
-		
-		progressBar.setValue(0);
+		barraPorcentagem.setValue(0);
 
 		File pastaOriginal = new File(caminhoPastaOriginal);
 		File pastaNova = new File(caminhoPastaOriginal + "\\Unicas");
@@ -37,13 +35,14 @@ public class ComparadorImagem extends Thread {
 		File[] imagensPastaOriginal = pastaOriginal.listFiles(new FileImageFilter());
 		File[] imagensUnicas = pastaNova.listFiles(new FileImageFilter());
 
-		int num = 100 / imagensPastaOriginal.length;
-		progressBar.setMaximum((100 / imagensPastaOriginal.length) * imagensPastaOriginal.length);
+		int unidade = 100 / imagensPastaOriginal.length;
+		barraPorcentagem.setMaximum((100 / imagensPastaOriginal.length) * imagensPastaOriginal.length);
 
 		for (File imagemPastaOriginal : imagensPastaOriginal) {
 
-			int value = progressBar.getValue();
-			progressBar.setValue(value + num);
+			int value = barraPorcentagem.getValue();
+			barraPorcentagem.setValue(value + unidade);
+			barraPorcentagem.setStringPainted(true);
 			boolean encontrouImagemIgual = false;
 			
 			for (File imagemUnica : imagensUnicas) {
