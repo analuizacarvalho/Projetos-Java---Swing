@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -27,7 +28,7 @@ public class View {
 		criarJPanel();
 		criarCaminho();
         criarBotaoBuscar();
-        criarBotaoAplicar();
+        criarBotaoFiltrar();
         criarBarraPorcentagem();
 		criarTelaPrincipal();
 	}
@@ -62,7 +63,7 @@ public class View {
 		contentPane.add(txtCaminho);
 	}
 	
-	public void criarBotaoAplicar() {
+	public void criarBotaoFiltrar() {
 		btnAplicar = new JButton("Filtrar");
 		btnAplicar.setBounds(190, 45, 89, 23);
 		btnAplicar.setEnabled(false);

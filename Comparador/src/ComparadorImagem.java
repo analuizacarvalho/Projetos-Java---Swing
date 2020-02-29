@@ -26,34 +26,38 @@ public class ComparadorImagem extends Thread {
 		barraPorcentagem.setValue(0);
 
 		File pastaOriginal = new File(caminhoPastaOriginal);
-		File pastaNova = new File(caminhoPastaOriginal + "\\Unicas");
-		
-		if(!pastaNova.exists()) {
-			pastaNova.mkdirs();
-		}
-		
 		File[] imagensPastaOriginal = pastaOriginal.listFiles(new FileImageFilter());
-		File[] imagensUnicas = pastaNova.listFiles(new FileImageFilter());
+		
+		if(imagensPastaOriginal.length > 0) {
+		
+		    File pastaNova = new File(caminhoPastaOriginal + "\\Unicas");
+		
+		    if(!pastaNova.exists()) {
+			    pastaNova.mkdirs();
+		    }
+		
+		    File[] imagensUnicas = pastaNova.listFiles(new FileImageFilter());
 
-		int unidade = 100 / imagensPastaOriginal.length;
-		barraPorcentagem.setMaximum((100 / imagensPastaOriginal.length) * imagensPastaOriginal.length);
+		    int unidade = 100 / imagensPastaOriginal.length;
+		    barraPorcentagem.setMaximum((100 / imagensPastaOriginal.length) * imagensPastaOriginal.length);
 
-		for (File imagemPastaOriginal : imagensPastaOriginal) {
+		    for (File imagemPastaOriginal : imagensPastaOriginal) {
 
-			int value = barraPorcentagem.getValue();
-			barraPorcentagem.setValue(value + unidade);
-			barraPorcentagem.setStringPainted(true);
-			boolean encontrouImagemIgual = false;
+			    int value = barraPorcentagem.getValue();
+			    barraPorcentagem.setValue(value + unidade);
+			    barraPorcentagem.setStringPainted(true);
+			    boolean encontrouImagemIgual = false;
 			
-			for (File imagemUnica : imagensUnicas) {
-				if (imagensIguais(imagemPastaOriginal, imagemUnica)) {
-					encontrouImagemIgual = true;
-				}
-			}
-			if (encontrouImagemIgual == false) {
-				copiaImagem(imagemPastaOriginal, pastaNova);
-				imagensUnicas = pastaNova.listFiles(new FileImageFilter());
-			}
+			    for (File imagemUnica : imagensUnicas) {
+				    if (imagensIguais(imagemPastaOriginal, imagemUnica)) {
+					    encontrouImagemIgual = true;
+				    }
+			    }
+			    if (encontrouImagemIgual == false) {
+				    copiaImagem(imagemPastaOriginal, pastaNova);
+				    imagensUnicas = pastaNova.listFiles(new FileImageFilter());
+			    }
+		    }
 		}
 	}
 

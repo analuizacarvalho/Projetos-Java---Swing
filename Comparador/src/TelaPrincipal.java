@@ -18,7 +18,6 @@ public class TelaPrincipal {
 		View view = new View();
 		Controller c = new Controller(view);
 		c.initController();
-		//new ViewMeiomexida();
 	}
 
 }
